@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator nestgraphql {
+    provider = "node node_modules/prisma-nestjs-graphql"
+    // for yarn monorepos
+    // provider = "prisma-nestjs-graphql"
+    output = "../src/@generated"
+}
+
+
+model Student {
+  id                        String        @id @default(uuid()) @map("_id")
+  seatNo                    Int           @unique
+  name                      String
+  shool                     String?
+  educationalAdministration String?
+  status                    StudentStatus
+  section                   String
+  mark                      Mark?
+}
+
+model Mark {
+  id            String        @id @default(uuid()) @map("_id")
+  student       Student       @relation(fields: [studentId], references: [id])
+  subjects      Subjects
+  otherSubjects OtherSubjects
+
+  studentId String @unique
+}
+
+type Subjects {
+  arabic                Float?
+  firstForeignLanguage  Float?
+  secondForeignLanguage Float?
+  pureMathematics       Float?
+  appliedMathematics    Float?
+  history               Float?
+  geography             Float?
+  philosophy            Float?
+  psychology            Float?
+  chemistry             Float?
+  biology               Float?
+  geology               Float?
+  physics               Float?
+}
+
+type OtherSubjects {
+  religiousEducation     Float?
+  nationalEducation      Float?
+  economicsAndStatistics Float?
+}
+
+enum StudentStatus {
+  PASSED
+  FAILED
+  SECOND_ROLE
+}

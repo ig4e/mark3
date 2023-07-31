@@ -9,6 +9,14 @@ export class AppController {
     private readonly studentsService: StudentsService,
   ) {}
 
+  @Get("/")
+  async root() {
+    return {
+      author: "IG4E (Ahmed mohamed) made with ❤",
+      version: "1.0.0",
+    };
+  }
+
   @Get("/scrape")
   async scrape() {
     return await this.appService.startScrape();

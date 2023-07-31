@@ -16,6 +16,12 @@ export class MarkCreateInput {
     @Field(() => OtherSubjectsCreateEnvelopeInput, {nullable:false})
     otherSubjects!: OtherSubjectsCreateEnvelopeInput;
 
+    @Field(() => Date, {nullable:true})
+    updatedAt?: Date | string;
+
+    @Field(() => Date, {nullable:true})
+    createdAt?: Date | string;
+
     @Field(() => StudentCreateNestedOneWithoutMarkInput, {nullable:false})
     student!: StudentCreateNestedOneWithoutMarkInput;
 }

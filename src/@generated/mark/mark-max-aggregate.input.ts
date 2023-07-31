@@ -9,4 +9,10 @@ export class MarkMaxAggregateInput {
 
     @Field(() => Boolean, {nullable:true})
     studentId?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    updatedAt?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    createdAt?: true;
 }

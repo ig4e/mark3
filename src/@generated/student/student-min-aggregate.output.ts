@@ -26,4 +26,10 @@ export class StudentMinAggregate {
 
     @Field(() => String, {nullable:true})
     section?: string;
+
+    @Field(() => Date, {nullable:true})
+    updatedAt?: Date | string;
+
+    @Field(() => Date, {nullable:true})
+    createdAt?: Date | string;
 }

@@ -31,6 +31,12 @@ export class StudentOrderByWithAggregationInput {
     @Field(() => SortOrder, {nullable:true})
     section?: keyof typeof SortOrder;
 
+    @Field(() => SortOrder, {nullable:true})
+    updatedAt?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    createdAt?: keyof typeof SortOrder;
+
     @Field(() => StudentCountOrderByAggregateInput, {nullable:true})
     _count?: StudentCountOrderByAggregateInput;
 

@@ -29,6 +29,12 @@ export class Student {
     @Field(() => String, {nullable:false})
     section!: string;
 
+    @Field(() => Date, {nullable:false})
+    updatedAt!: Date;
+
+    @Field(() => Date, {nullable:false})
+    createdAt!: Date;
+
     @Field(() => Mark, {nullable:true})
     mark?: Mark | null;
 }

@@ -32,6 +32,12 @@ export class StudentGroupBy {
     @Field(() => String, {nullable:false})
     section!: string;
 
+    @Field(() => Date, {nullable:false})
+    updatedAt!: Date | string;
+
+    @Field(() => Date, {nullable:false})
+    createdAt!: Date | string;
+
     @Field(() => StudentCountAggregate, {nullable:true})
     _count?: StudentCountAggregate;
 

@@ -7,15 +7,42 @@ import { Mark, Student } from "@prisma/client";
 import { randomUUID } from "crypto";
 import * as http from "http";
 import { cleanTrim, convertToNumber } from "./utils/scrape";
+import axiosRetry from "axios-retry";
 
 const concurrentRequests = 50;
+
+const sources = [
+  {
+    name: "DOSTOR",
+    url: "https://natega.dostor.org/Home/Natega",
+    referer: "https://natega.dostor.org",
+  },
+  {
+    name: "ELBALAD",
+    url: "https://natega.elbalad.news/Home/Natega",
+    referer: "https://natega.elbalad.news/",
+  },
+  {
+    name: "ELWATAN",
+    url: "https://natega.elwatannews.com/Home/Natega",
+    referer: "https://natega.elwatannews.com",
+  },
+] as const;
+
+let count = 0;
+
+function getSource() {
+  if (count >= sources.length) count = 0;
+  const currentSource = sources[count];
+  count++;
+  return currentSource;
+}
 
 @Injectable()
 export class AppService {
   constructor(private prisma: PrismaService) {}
   private readonly logger = new Logger(PrismaService.name);
   private readonly axios = axios.create({
-    timeout: 2000,
     httpAgent: new http.Agent({ keepAlive: true }),
   });
 
@@ -29,7 +56,7 @@ export class AppService {
             const result = await this.scrape(ii);
             this.logger.log(`[SUCCESS] Scraped ${ii} | Name: ${result.name}`);
           } catch (err) {
-            this.logger.log(`[FAILED] To scrape ${ii}`, err);
+            this.logger.error(`[FAILED] To scrape ${ii}`, err);
           }
         }),
       );
@@ -37,12 +64,27 @@ export class AppService {
   }
 
   async scrape(seatNo: number) {
+    axiosRetry(this.axios, {
+      retries: 10,
+      retryDelay: (retryCount) => {
+        console.log(`[RETRY] retry attempt: ${retryCount}`);
+        return retryCount * 1000;
+      },
+      retryCondition(error) {
+        return true;
+      },
+    });
+
+    const source = getSource();
+
+    this.logger.log(`[INFO] Using source: ${source.name}`);
+
     let config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: "https://natega.elbalad.news/Home/Natega",
+      url: source.url,
       headers: {
-        authority: "natega.elbalad.news",
+        referer: source.referer,
         accept:
           "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
         "accept-language": "en,en-US;q=0.9,ar;q=0.8",
@@ -50,8 +92,7 @@ export class AppService {
         "content-type": "application/x-www-form-urlencoded",
         cookie:
           "_ga=GA1.1.1819380733.1690770986; ASP.NET_SessionId=1ifrun1jlsjypfmxvxrzi5gb; __gads=ID=a360eb6aa3361247:T=1690794331:RT=1690794331:S=ALNI_MasAW2DelpGl6Ut7ClUHXR108x4dw; __gpi=UID=00000c74fb963d6b:T=1690794331:RT=1690794331:S=ALNI_MZ6nzar8CP2iUN_654L0W9TECK-HA; _ga_5Y1MZ8E8E5=GS1.1.1690792239.2.1.1690795570.59.0.0; _ga_VXVVNZQ2XJ=GS1.1.1690792239.2.1.1690795571.58.0.0; amp_a0683b=i_gCRC9RFIs4PRfhGv0jSg.aG9wd3AwcmsydG55cA==..1h6lh47m2.1h6lk9utq.0.0.0; mp_10bab2a6cec3a2ef62083257f3f09083_mixpanel=%7B%22distinct_id%22%3A%20%22189a9cdd9f51a7-098340337eb5a3-26031c51-1c03e0-189a9cdd9f6bb9%22%2C%22%24device_id%22%3A%20%22189a9cdd9f51a7-098340337eb5a3-26031c51-1c03e0-189a9cdd9f6bb9%22%2C%22%24initial_referrer%22%3A%20%22%24direct%22%2C%22%24initial_referring_domain%22%3A%20%22%24direct%22%7D",
-        origin: "https://natega.elbalad.news",
-        referer: "https://natega.elbalad.news/",
+
         "sec-ch-ua":
           '"Not/A)Brand";v="99", "Google Chrome";v="115", "Chromium";v="115"',
         "sec-ch-ua-mobile": "?0",
@@ -108,6 +149,8 @@ export class AppService {
           : status === "راسب"
           ? "FAILED"
           : "SECOND_ROLE",
+      updatedAt: new Date(),
+      createdAt: new Date(),
       mark: {
         id: randomUUID(),
         subjects: {
@@ -252,6 +295,8 @@ export class AppService {
                 ?.trim(),
             ) ?? undefined,
         },
+        createdAt: new Date(),
+        updatedAt: new Date(),
         studentId: "",
       },
     };

@@ -14,6 +14,12 @@ export class MarkOrderByWithAggregationInput {
     @Field(() => SortOrder, {nullable:true})
     studentId?: keyof typeof SortOrder;
 
+    @Field(() => SortOrder, {nullable:true})
+    updatedAt?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    createdAt?: keyof typeof SortOrder;
+
     @Field(() => MarkCountOrderByAggregateInput, {nullable:true})
     _count?: MarkCountOrderByAggregateInput;
 

@@ -20,6 +20,12 @@ export class Mark {
     @Field(() => String, {nullable:false})
     studentId!: string;
 
+    @Field(() => Date, {nullable:false})
+    updatedAt!: Date;
+
+    @Field(() => Date, {nullable:false})
+    createdAt!: Date;
+
     @Field(() => Student, {nullable:false})
     student?: Student;
 }

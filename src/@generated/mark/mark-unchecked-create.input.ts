@@ -17,4 +17,10 @@ export class MarkUncheckedCreateInput {
 
     @Field(() => String, {nullable:false})
     studentId!: string;
+
+    @Field(() => Date, {nullable:true})
+    updatedAt?: Date | string;
+
+    @Field(() => Date, {nullable:true})
+    createdAt?: Date | string;
 }

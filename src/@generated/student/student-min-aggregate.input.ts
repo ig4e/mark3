@@ -24,4 +24,10 @@ export class StudentMinAggregateInput {
 
     @Field(() => Boolean, {nullable:true})
     section?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    updatedAt?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    createdAt?: true;
 }

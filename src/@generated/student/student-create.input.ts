@@ -28,6 +28,12 @@ export class StudentCreateInput {
     @Field(() => String, {nullable:false})
     section!: string;
 
+    @Field(() => Date, {nullable:true})
+    updatedAt?: Date | string;
+
+    @Field(() => Date, {nullable:true})
+    createdAt?: Date | string;
+
     @Field(() => MarkCreateNestedOneWithoutStudentInput, {nullable:true})
     mark?: MarkCreateNestedOneWithoutStudentInput;
 }

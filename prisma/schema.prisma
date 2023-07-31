@@ -11,12 +11,11 @@ datasource db {
 }
 
 generator nestgraphql {
-    provider = "node node_modules/prisma-nestjs-graphql"
-    // for yarn monorepos
-    // provider = "prisma-nestjs-graphql"
-    output = "../src/@generated"
+  provider = "node node_modules/prisma-nestjs-graphql"
+  // for yarn monorepos
+  // provider = "prisma-nestjs-graphql"
+  output   = "../src/@generated"
 }
-
 
 model Student {
   id                        String        @id @default(uuid()) @map("_id")
@@ -27,6 +26,9 @@ model Student {
   status                    StudentStatus
   section                   String
   mark                      Mark?
+
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
 }
 
 model Mark {
@@ -35,7 +37,9 @@ model Mark {
   subjects      Subjects
   otherSubjects OtherSubjects
 
-  studentId String @unique
+  studentId String   @unique
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
 }
 
 type Subjects {

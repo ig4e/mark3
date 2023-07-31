@@ -28,6 +28,12 @@ export class StudentUncheckedCreateInput {
     @Field(() => String, {nullable:false})
     section!: string;
 
+    @Field(() => Date, {nullable:true})
+    updatedAt?: Date | string;
+
+    @Field(() => Date, {nullable:true})
+    createdAt?: Date | string;
+
     @Field(() => MarkUncheckedCreateNestedOneWithoutStudentInput, {nullable:true})
     mark?: MarkUncheckedCreateNestedOneWithoutStudentInput;
 }

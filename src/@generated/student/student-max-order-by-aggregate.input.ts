@@ -25,4 +25,10 @@ export class StudentMaxOrderByAggregateInput {
 
     @Field(() => SortOrder, {nullable:true})
     section?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    updatedAt?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    createdAt?: keyof typeof SortOrder;
 }

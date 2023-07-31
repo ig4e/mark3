@@ -10,4 +10,10 @@ export class MarkCountOrderByAggregateInput {
 
     @Field(() => SortOrder, {nullable:true})
     studentId?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    updatedAt?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    createdAt?: keyof typeof SortOrder;
 }

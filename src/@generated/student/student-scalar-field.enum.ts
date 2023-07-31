@@ -7,7 +7,9 @@ export enum StudentScalarFieldEnum {
     shool = "shool",
     educationalAdministration = "educationalAdministration",
     status = "status",
-    section = "section"
+    section = "section",
+    updatedAt = "updatedAt",
+    createdAt = "createdAt"
 }
 
 

@@ -13,6 +13,12 @@ export class MarkGroupBy {
     @Field(() => String, {nullable:false})
     studentId!: string;
 
+    @Field(() => Date, {nullable:false})
+    updatedAt!: Date | string;
+
+    @Field(() => Date, {nullable:false})
+    createdAt!: Date | string;
+
     @Field(() => MarkCountAggregate, {nullable:true})
     _count?: MarkCountAggregate;
 

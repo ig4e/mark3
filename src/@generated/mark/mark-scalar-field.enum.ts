@@ -2,7 +2,9 @@ import { registerEnumType } from '@nestjs/graphql';
 
 export enum MarkScalarFieldEnum {
     id = "id",
-    studentId = "studentId"
+    studentId = "studentId",
+    updatedAt = "updatedAt",
+    createdAt = "createdAt"
 }
 
 

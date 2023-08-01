@@ -47,7 +47,7 @@ export class AppService {
   });
 
   async startScrape() {
-    for (let i = 1008759; i <= 9000000; i += concurrentRequests) {
+    for (let i = 1189000; i <= 2000000; i += concurrentRequests) {
       await Promise.all(
         Array.from({ length: concurrentRequests }).map(async (item, index) => {
           const ii = i + index;

@@ -14,7 +14,7 @@ export class StudentMaxAggregateInput {
     name?: true;
 
     @Field(() => Boolean, {nullable:true})
-    shool?: true;
+    school?: true;
 
     @Field(() => Boolean, {nullable:true})
     educationalAdministration?: true;
@@ -24,6 +24,9 @@ export class StudentMaxAggregateInput {
 
     @Field(() => Boolean, {nullable:true})
     section?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    totalScore?: true;
 
     @Field(() => Boolean, {nullable:true})
     updatedAt?: true;

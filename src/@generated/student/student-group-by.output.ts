@@ -2,6 +2,7 @@ import { Field } from '@nestjs/graphql';
 import { ObjectType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
 import { StudentStatus } from '../prisma/student-status.enum';
+import { Float } from '@nestjs/graphql';
 import { StudentCountAggregate } from './student-count-aggregate.output';
 import { StudentAvgAggregate } from './student-avg-aggregate.output';
 import { StudentSumAggregate } from './student-sum-aggregate.output';
@@ -21,7 +22,7 @@ export class StudentGroupBy {
     name!: string;
 
     @Field(() => String, {nullable:true})
-    shool?: string;
+    school?: string;
 
     @Field(() => String, {nullable:true})
     educationalAdministration?: string;
@@ -31,6 +32,9 @@ export class StudentGroupBy {
 
     @Field(() => String, {nullable:false})
     section!: string;
+
+    @Field(() => Float, {nullable:false})
+    totalScore!: number;
 
     @Field(() => Date, {nullable:false})
     updatedAt!: Date | string;

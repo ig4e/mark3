@@ -21,10 +21,11 @@ model Student {
   id                        String        @id @default(uuid()) @map("_id")
   seatNo                    Int           @unique
   name                      String
-  shool                     String?
+  school                    String?
   educationalAdministration String?
   status                    StudentStatus
   section                   String
+  totalScore                Float
   mark                      Mark?
 
   updatedAt DateTime @updatedAt

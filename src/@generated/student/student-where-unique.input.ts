@@ -5,6 +5,7 @@ import { StudentWhereInput } from './student-where.input';
 import { StringFilter } from '../prisma/string-filter.input';
 import { StringNullableFilter } from '../prisma/string-nullable-filter.input';
 import { EnumStudentStatusFilter } from '../prisma/enum-student-status-filter.input';
+import { FloatFilter } from '../prisma/float-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
 import { MarkNullableRelationFilter } from '../mark/mark-nullable-relation-filter.input';
 
@@ -30,7 +31,7 @@ export class StudentWhereUniqueInput {
     name?: StringFilter;
 
     @Field(() => StringNullableFilter, {nullable:true})
-    shool?: StringNullableFilter;
+    school?: StringNullableFilter;
 
     @Field(() => StringNullableFilter, {nullable:true})
     educationalAdministration?: StringNullableFilter;
@@ -40,6 +41,9 @@ export class StudentWhereUniqueInput {
 
     @Field(() => StringFilter, {nullable:true})
     section?: StringFilter;
+
+    @Field(() => FloatFilter, {nullable:true})
+    totalScore?: FloatFilter;
 
     @Field(() => DateTimeFilter, {nullable:true})
     updatedAt?: DateTimeFilter;

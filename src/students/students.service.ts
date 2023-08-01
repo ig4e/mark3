@@ -63,8 +63,6 @@ export class StudentsService {
       perPage: studentPageInput?.perPage,
     });
 
-    console.log(pageInfo);
-
     const items = await this.prisma.student.findMany({
       where: studentWhereInput,
       skip: pageInfo.offset,

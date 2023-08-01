@@ -4,6 +4,7 @@ import { StringWithAggregatesFilter } from '../prisma/string-with-aggregates-fil
 import { IntWithAggregatesFilter } from '../prisma/int-with-aggregates-filter.input';
 import { StringNullableWithAggregatesFilter } from '../prisma/string-nullable-with-aggregates-filter.input';
 import { EnumStudentStatusWithAggregatesFilter } from '../prisma/enum-student-status-with-aggregates-filter.input';
+import { FloatWithAggregatesFilter } from '../prisma/float-with-aggregates-filter.input';
 import { DateTimeWithAggregatesFilter } from '../prisma/date-time-with-aggregates-filter.input';
 
 @InputType()
@@ -28,7 +29,7 @@ export class StudentScalarWhereWithAggregatesInput {
     name?: StringWithAggregatesFilter;
 
     @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
-    shool?: StringNullableWithAggregatesFilter;
+    school?: StringNullableWithAggregatesFilter;
 
     @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
     educationalAdministration?: StringNullableWithAggregatesFilter;
@@ -38,6 +39,9 @@ export class StudentScalarWhereWithAggregatesInput {
 
     @Field(() => StringWithAggregatesFilter, {nullable:true})
     section?: StringWithAggregatesFilter;
+
+    @Field(() => FloatWithAggregatesFilter, {nullable:true})
+    totalScore?: FloatWithAggregatesFilter;
 
     @Field(() => DateTimeWithAggregatesFilter, {nullable:true})
     updatedAt?: DateTimeWithAggregatesFilter;

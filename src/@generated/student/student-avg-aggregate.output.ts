@@ -7,4 +7,7 @@ export class StudentAvgAggregate {
 
     @Field(() => Float, {nullable:true})
     seatNo?: number;
+
+    @Field(() => Float, {nullable:true})
+    totalScore?: number;
 }

@@ -9,7 +9,7 @@ import * as http from "http";
 import { cleanTrim, convertToNumber } from "./utils/scrape";
 import axiosRetry from "axios-retry";
 
-const concurrentRequests = 50;
+const concurrentRequests = 500;
 
 const sources = [
   {
@@ -122,13 +122,18 @@ export class AppService {
     const result: Student & { mark: Mark } = {
       id: randomUUID(),
       seatNo: seatNo,
+      totalScore: convertToNumber(
+        $(
+          `div.all > div.RightSide > div.data-result > div > div > ul > li:nth-child(2) > h1`,
+        ).text(),
+      ),
       name: cleanTrim(
         $(
           `div.all > div.RightSide > div.full-result > ul > li:nth-child(1) > span:nth-child(2)`,
         ).text(),
       ),
 
-      shool: cleanTrim(
+      school: cleanTrim(
         $(
           `div.all > div.RightSide > div.full-result > ul > li:nth-child(2) > span:nth-child(2)`,
         ).text(),
@@ -277,7 +282,8 @@ export class AppService {
                 .text()
                 ?.trim(),
             ) ?? undefined,
-          economicsAndStatistics:
+
+          nationalEducation:
             convertToNumber(
               $(
                 `div.result-info > div.result-details > div > ul > li:nth-child(2) > span.formatt4`,
@@ -286,7 +292,7 @@ export class AppService {
                 ?.trim(),
             ) ?? undefined,
 
-          nationalEducation:
+          economicsAndStatistics:
             convertToNumber(
               $(
                 `div.result-info > div.result-details > div > ul > li:nth-child(3) > span.formatt4`,
@@ -305,11 +311,12 @@ export class AppService {
 
     const input = {
       name: result.name,
+      totalScore: result.totalScore,
       seatNo: seatNo,
       status: result.status,
       section: result.section,
       educationalAdministration: result.educationalAdministration,
-      shool: result.shool,
+      school: result.school,
     };
 
     const student = await this.prisma.student.upsert({

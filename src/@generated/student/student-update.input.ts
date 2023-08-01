@@ -4,6 +4,7 @@ import { IntFieldUpdateOperationsInput } from '../prisma/int-field-update-operat
 import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-operations.input';
 import { NullableStringFieldUpdateOperationsInput } from '../prisma/nullable-string-field-update-operations.input';
 import { EnumStudentStatusFieldUpdateOperationsInput } from '../prisma/enum-student-status-field-update-operations.input';
+import { FloatFieldUpdateOperationsInput } from '../prisma/float-field-update-operations.input';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
 import { MarkUpdateOneWithoutStudentNestedInput } from '../mark/mark-update-one-without-student-nested.input';
 
@@ -17,7 +18,7 @@ export class StudentUpdateInput {
     name?: StringFieldUpdateOperationsInput;
 
     @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
-    shool?: NullableStringFieldUpdateOperationsInput;
+    school?: NullableStringFieldUpdateOperationsInput;
 
     @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
     educationalAdministration?: NullableStringFieldUpdateOperationsInput;
@@ -27,6 +28,9 @@ export class StudentUpdateInput {
 
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     section?: StringFieldUpdateOperationsInput;
+
+    @Field(() => FloatFieldUpdateOperationsInput, {nullable:true})
+    totalScore?: FloatFieldUpdateOperationsInput;
 
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     updatedAt?: DateTimeFieldUpdateOperationsInput;

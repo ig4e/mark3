@@ -7,4 +7,7 @@ export class StudentSumOrderByAggregateInput {
 
     @Field(() => SortOrder, {nullable:true})
     seatNo?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    totalScore?: keyof typeof SortOrder;
 }

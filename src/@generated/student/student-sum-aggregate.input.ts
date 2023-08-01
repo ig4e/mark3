@@ -6,4 +6,7 @@ export class StudentSumAggregateInput {
 
     @Field(() => Boolean, {nullable:true})
     seatNo?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    totalScore?: true;
 }

@@ -20,7 +20,7 @@ export class StudentOrderByWithAggregationInput {
     name?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
-    shool?: keyof typeof SortOrder;
+    school?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
     educationalAdministration?: keyof typeof SortOrder;
@@ -30,6 +30,9 @@ export class StudentOrderByWithAggregationInput {
 
     @Field(() => SortOrder, {nullable:true})
     section?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    totalScore?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
     updatedAt?: keyof typeof SortOrder;

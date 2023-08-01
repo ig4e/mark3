@@ -2,6 +2,7 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
 import { StudentStatus } from '../prisma/student-status.enum';
+import { Float } from '@nestjs/graphql';
 
 @InputType()
 export class StudentUncheckedCreateWithoutMarkInput {
@@ -16,7 +17,7 @@ export class StudentUncheckedCreateWithoutMarkInput {
     name!: string;
 
     @Field(() => String, {nullable:true})
-    shool?: string;
+    school?: string;
 
     @Field(() => String, {nullable:true})
     educationalAdministration?: string;
@@ -26,6 +27,9 @@ export class StudentUncheckedCreateWithoutMarkInput {
 
     @Field(() => String, {nullable:false})
     section!: string;
+
+    @Field(() => Float, {nullable:false})
+    totalScore!: number;
 
     @Field(() => Date, {nullable:true})
     updatedAt?: Date | string;

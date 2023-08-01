@@ -15,7 +15,7 @@ export class StudentCountAggregate {
     name!: number;
 
     @Field(() => Int, {nullable:false})
-    shool!: number;
+    school!: number;
 
     @Field(() => Int, {nullable:false})
     educationalAdministration!: number;
@@ -25,6 +25,9 @@ export class StudentCountAggregate {
 
     @Field(() => Int, {nullable:false})
     section!: number;
+
+    @Field(() => Int, {nullable:false})
+    totalScore!: number;
 
     @Field(() => Int, {nullable:false})
     updatedAt!: number;

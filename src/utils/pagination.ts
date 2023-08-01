@@ -36,14 +36,14 @@ export type PaginateOptions = {
 
 export function getPageInfo({
   total,
-  currentPage = 0,
+  currentPage = 1,
   perPage = 25,
 }: PaginateOptions) {
   if (perPage > 100) perPage = 100;
   const totalPages = Math.floor(total / perPage);
   const lastPage = totalPages;
   const hasNextPage = currentPage >= lastPage ? false : true;
-  const offset = currentPage * perPage;
+  const offset = (currentPage - 1) * perPage;
 
   return {
     totalPages,

@@ -50,8 +50,8 @@ export class StudentsService {
     studentPageInput,
     studentWhereInput,
   }: {
-    studentPageInput: PageInput;
-    studentWhereInput: StudentWhereInput;
+    studentPageInput: PageInput | undefined;
+    studentWhereInput: StudentWhereInput | undefined;
   }): Promise<StudentPage> {
     const totalStudents = await this.prisma.student.count({
       where: studentWhereInput,
@@ -59,9 +59,11 @@ export class StudentsService {
 
     const pageInfo = getPageInfo({
       total: totalStudents,
-      currentPage: studentPageInput.currentPage,
-      perPage: studentPageInput.perPage,
+      currentPage: studentPageInput?.currentPage,
+      perPage: studentPageInput?.perPage,
     });
+
+    console.log(pageInfo);
 
     const items = await this.prisma.student.findMany({
       where: studentWhereInput,
@@ -72,14 +74,16 @@ export class StudentsService {
     return { items, pageInfo };
   }
 
-  findOne({
+  async findOne({
     studentWhereUniqueInput,
   }: {
     studentWhereUniqueInput: StudentWhereUniqueInput;
   }) {
-    return this.prisma.student.findUnique({
+    const student = await this.prisma.student.findUnique({
       where: studentWhereUniqueInput as Prisma.StudentWhereUniqueInput,
     });
+
+    return student;
   }
 
   getMark({ studentId }: { studentId: string }) {

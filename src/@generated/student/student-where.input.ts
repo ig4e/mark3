@@ -5,8 +5,9 @@ import { IntFilter } from '../prisma/int-filter.input';
 import { StringNullableFilter } from '../prisma/string-nullable-filter.input';
 import { EnumStudentStatusFilter } from '../prisma/enum-student-status-filter.input';
 import { FloatFilter } from '../prisma/float-filter.input';
+import { SubjectsCompositeFilter } from '../prisma/subjects-composite-filter.input';
+import { OtherSubjectsCompositeFilter } from '../prisma/other-subjects-composite-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
-import { MarkNullableRelationFilter } from '../mark/mark-nullable-relation-filter.input';
 
 @InputType()
 export class StudentWhereInput {
@@ -44,12 +45,15 @@ export class StudentWhereInput {
     @Field(() => FloatFilter, {nullable:true})
     totalScore?: FloatFilter;
 
+    @Field(() => SubjectsCompositeFilter, {nullable:true})
+    subjects?: SubjectsCompositeFilter;
+
+    @Field(() => OtherSubjectsCompositeFilter, {nullable:true})
+    otherSubjects?: OtherSubjectsCompositeFilter;
+
     @Field(() => DateTimeFilter, {nullable:true})
     updatedAt?: DateTimeFilter;
 
     @Field(() => DateTimeFilter, {nullable:true})
     createdAt?: DateTimeFilter;
-
-    @Field(() => MarkNullableRelationFilter, {nullable:true})
-    mark?: MarkNullableRelationFilter;
 }

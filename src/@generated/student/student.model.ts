@@ -4,7 +4,8 @@ import { ID } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
 import { StudentStatus } from '../prisma/student-status.enum';
 import { Float } from '@nestjs/graphql';
-import { Mark } from '../mark/mark.model';
+import { Subjects } from '../subjects/subjects.model';
+import { OtherSubjects } from '../other-subjects/other-subjects.model';
 
 @ObjectType()
 export class Student {
@@ -33,12 +34,15 @@ export class Student {
     @Field(() => Float, {nullable:false})
     totalScore!: number;
 
+    @Field(() => Subjects, {nullable:false})
+    subjects?: Subjects;
+
+    @Field(() => OtherSubjects, {nullable:false})
+    otherSubjects?: OtherSubjects;
+
     @Field(() => Date, {nullable:false})
     updatedAt!: Date;
 
     @Field(() => Date, {nullable:false})
     createdAt!: Date;
-
-    @Field(() => Mark, {nullable:true})
-    mark?: Mark | null;
 }

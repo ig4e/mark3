@@ -26,19 +26,9 @@ model Student {
   status                    StudentStatus
   section                   String
   totalScore                Float
-  mark                      Mark?
+  subjects                  Subjects
+  otherSubjects             OtherSubjects
 
-  updatedAt DateTime @updatedAt
-  createdAt DateTime @default(now())
-}
-
-model Mark {
-  id            String        @id @default(uuid()) @map("_id")
-  student       Student       @relation(fields: [studentId], references: [id])
-  subjects      Subjects
-  otherSubjects OtherSubjects
-
-  studentId String   @unique
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
 }

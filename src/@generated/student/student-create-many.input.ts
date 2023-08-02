@@ -3,6 +3,8 @@ import { InputType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
 import { StudentStatus } from '../prisma/student-status.enum';
 import { Float } from '@nestjs/graphql';
+import { SubjectsCreateEnvelopeInput } from '../subjects/subjects-create-envelope.input';
+import { OtherSubjectsCreateEnvelopeInput } from '../other-subjects/other-subjects-create-envelope.input';
 
 @InputType()
 export class StudentCreateManyInput {
@@ -30,6 +32,12 @@ export class StudentCreateManyInput {
 
     @Field(() => Float, {nullable:false})
     totalScore!: number;
+
+    @Field(() => SubjectsCreateEnvelopeInput, {nullable:false})
+    subjects!: SubjectsCreateEnvelopeInput;
+
+    @Field(() => OtherSubjectsCreateEnvelopeInput, {nullable:false})
+    otherSubjects!: OtherSubjectsCreateEnvelopeInput;
 
     @Field(() => Date, {nullable:true})
     updatedAt?: Date | string;

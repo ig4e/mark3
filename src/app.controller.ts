@@ -27,10 +27,8 @@ export class AppController {
     return await this.studentsService.search({ query });
   }
 
-
   @Get("/get-student")
   async getStudent(@Query("seatNo") seatNo: number) {
-    return await this.appService.scrape(Number(seatNo))
+    return await this.appService.scrapeGov(Number(seatNo));
   }
-
 }

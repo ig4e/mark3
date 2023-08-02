@@ -83,10 +83,4 @@ export class StudentsService {
 
     return student;
   }
-
-  getMark({ studentId }: { studentId: string }) {
-    return this.prisma.mark.findUnique({
-      where: { studentId },
-    });
-  }
 }

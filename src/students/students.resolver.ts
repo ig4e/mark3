@@ -46,10 +46,4 @@ export class StudentsResolver {
   ) {
     return this.studentsService.findOne({ studentWhereUniqueInput });
   }
-
-  @ResolveField()
-  async mark(@Parent() student: Student) {
-    const { id } = student;
-    return this.studentsService.getMark({ studentId: id });
-  }
 }

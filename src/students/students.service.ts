@@ -19,13 +19,12 @@ export class StudentsService {
             index: "default",
             text: {
               query: query,
-              path: {
-                wildcard: "*",
-              },
+              path: "name",
+              fuzzy: true,
             },
           },
         },
-        { $limit: 25 },
+        { $limit: 50 },
         {
           $project: {
             id: "$_id",
@@ -41,7 +40,7 @@ export class StudentsService {
       ],
     })) as unknown as Student[];
 
-    const pageInfo = getPageInfo({ total: 25, currentPage: 1, perPage: 25 });
+    const pageInfo = getPageInfo({ total: 50, currentPage: 1, perPage: 50 });
 
     return { items, pageInfo };
   }

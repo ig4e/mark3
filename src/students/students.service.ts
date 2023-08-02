@@ -20,7 +20,7 @@ export class StudentsService {
             text: {
               query: query,
               path: "name",
-              fuzzy: true,
+              fuzzy: {},
             },
           },
         },
